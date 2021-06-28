@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zrs.babytun.Mapper.GoodsMapper">
+    <select id="getGoodsById" parameterType="long" resultType="com.zrs.babytun.Pojo.Goods">
+        select *
+        from t_goods
+        where goods_id = #{id}
+    </select>
+    <select id="getAllGoods" resultType="com.zrs.babytun.Pojo.Goods">
+        select *
+        from t_goods
+    </select>
+    <select id="getGoodsLast5Minutes" resultType="com.zrs.babytun.Pojo.Goods">
+        select *
+        from t_goods
+        where last_update_time >= now() - interval 5 minute
+    </select>
+    <select id="getGoodsCoverById" parameterType="long" resultType="com.zrs.babytun.Pojo.GoodsCover">
+        select *
+        from t_goods_cover
+        where goods_id = #{id}
+        order by gc_order
+    </select>
+
+
+    <select id="getGoodsDetailById" parameterType="long" resultType="com.zrs.babytun.Pojo.GoodsDetail">
+        select *
+        from t_goods_detail
+        where goods_id = #{id}
+        order by gd_order
+    </select>
+
+    <select id="getGoodsParamById" parameterType="long" resultType="com.zrs.babytun.Pojo.GoodsParam">
+        select *
+        from t_goods_param
+        where goods_id = #{id}
+        order by gp_order
+    </select>
+
+
+    <select id="getGoodsEvaluateById" parameterType="long" resultType="com.zrs.babytun.Pojo.Evaluate">
+        select *
+        from t_evaluate
+        where goods_id = #{id}
+        order by create_time desc
+    </select>
+</mapper>

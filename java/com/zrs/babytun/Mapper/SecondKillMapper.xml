@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zrs.babytun.Mapper.SecondKillMapper">
+    <select id="getSecondSkillById" resultType="com.zrs.babytun.Pojo.SecondKillGoods">
+        select *
+        from t_promotion_seckill
+        where ps_id = #{ps_id}
+    </select>
+    <select id="getUnStartSecondKillGoods" resultType="com.zrs.babytun.Pojo.SecondKillGoods">
+        select *
+        from t_promotion_seckill
+        where now() between start_time and  end_time
+          and status = 0
+    </select>
+    <select id="getFinishedSecondKillGoods" resultType="com.zrs.babytun.Pojo.SecondKillGoods">
+        select *
+        from t_promotion_seckill
+        where now() > end_time
+          and status = 1
+    </select>
+    <select id="updateSecondKillGoods" parameterType="com.zrs.babytun.Pojo.SecondKillGoods">
+        update t_promotion_seckill
+        set goods_id=#{goods_id},
+            ps_count=#{ps_count},
+            start_time=#{start_time},
+            end_time=#{end_time},
+            status=#{status},
+            current_price=#{current_price}
+        where ps_id = #{ps_id}
+    </select>
+</mapper>
